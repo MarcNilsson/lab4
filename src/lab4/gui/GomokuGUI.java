@@ -41,6 +41,7 @@ public class GomokuGUI implements Observer{
 		this.gamestate = g;
 		client.addObserver(this);
 		gamestate.addObserver(this);
+
 		
 		grid = gamestate.getGameGrid();
 		gameGridPanel = new GamePanel(grid);
@@ -51,40 +52,30 @@ public class GomokuGUI implements Observer{
 		JLabel messageLabel = new JLabel();
 		JFrame window = new JFrame();
 		
-		Box menu = Box.createVerticalBox();
+		//Box menu = Box.createHorizontalBox();
+		Box menu = new Box(BoxLayout.LINE_AXIS);
+
 		
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(gamestate.DEFAULT_SIZE*gameGridPanel.UNIT_SIZE+20, gamestate.DEFAULT_SIZE*gameGridPanel.UNIT_SIZE+120);
+		window.setSize(gamestate.DEFAULT_SIZE*gameGridPanel.UNIT_SIZE+100, gamestate.DEFAULT_SIZE*gameGridPanel.UNIT_SIZE+180);		
 		
-		System.out.println(grid.getSize());
-		
-		
-		menu.add(Box.createHorizontalGlue());
-		menu.add(connectButton, BoxLayout.Y_AXIS);
+		menu.add(connectButton);
 		menu.add(newGameButton);
 		menu.add(disconnectButton);
-		window.add(messageLabel);
-		window.add(menu, BorderLayout.PAGE_END);
-		window.add(gameGridPanel);
+		window.add(messageLabel, BorderLayout.CENTER);
+		window.add(menu, BorderLayout.SOUTH);
+		window.add(gameGridPanel, BorderLayout.NORTH);
+		messageLabel.setText(gamestate.getMessageString());
+		window.pack();
 		
-	
-		
-		
-		
-		
-
-			
-		class mouseListener extends MouseAdapter {					
-				public void mouseClicked(MouseEvent e) {
-				System.out.println("GUI click: "+e.getX()+" "+e.getY() );
-				}
-				
+		gameGridPanel.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("GUI click: " + e.getX() + " " + e.getY());
+				g.move(e.getX(), e.getY());
 			}
-			
-		
-		gameGridPanel.addMouseListener(new mouseListener());
-		
+
+		});		
 		
 		
 	}
@@ -94,6 +85,7 @@ public class GomokuGUI implements Observer{
 		
 		// Update the buttons if the connection status has changed
 		if(arg0 == client){
+			messageLabel.setText(gamestate.getMessageString());
 			if(client.getConnectionStatus() == GomokuClient.UNCONNECTED){
 				connectButton.setEnabled(true);
 				newGameButton.setEnabled(false);

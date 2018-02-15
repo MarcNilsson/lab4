@@ -29,7 +29,7 @@ public class GomokuGameState extends Observable implements Observer{
 	
 	private GomokuClient client;
 	
-	private String message;
+	private String message = "asd";
 	
 	/**
 	 * The constructor
@@ -72,8 +72,12 @@ public class GomokuGameState extends Observable implements Observer{
 	public void move(int x, int y){
 		if (currentState == NOT_STARTED) {
 			message = "The game is not started.";
+			System.out.println("hej");
 		} else if (currentState == OTHER_TURN) {
 			message = "It is not your turn yet.";
+			System.out.println("hej");
+		} else {
+			System.out.println("hej");
 		}
 	}
 	

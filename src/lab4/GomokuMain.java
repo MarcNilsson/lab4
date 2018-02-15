@@ -20,10 +20,10 @@ public class GomokuMain {
 		GomokuGUI GGUIOne = new GomokuGUI(GGSOne,GCOne);
 		
 		//Client 2.
-		int portNumberTwo = (args.length<2) ? 9002 : Integer.parseInt(args[1]);
-		GomokuClient GCTwo = new GomokuClient(portNumberTwo);
-		GomokuGameState GGSTwo = new GomokuGameState(GCTwo);
-		GomokuGUI GGUITwo = new GomokuGUI(GGSTwo,GCTwo);
+		//int portNumberTwo = (args.length<2) ? 9002 : Integer.parseInt(args[1]);
+		//GomokuClient GCTwo = new GomokuClient(portNumberTwo);
+		//GomokuGameState GGSTwo = new GomokuGameState(GCTwo);
+		//GomokuGUI GGUITwo = new GomokuGUI(GGSTwo,GCTwo);
 
 	}
 

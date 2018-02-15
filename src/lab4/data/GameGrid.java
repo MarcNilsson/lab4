@@ -62,6 +62,7 @@ public class GameGrid extends Observable{
 	 * @return true if the insertion worked, false otherwise
 	 */
 	public boolean move(int x, int y, int player){
+		
 		return true; //ej klar
 	}
 	
