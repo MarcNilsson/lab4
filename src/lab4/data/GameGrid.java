@@ -3,6 +3,8 @@ package lab4.data;
 import java.awt.Color;
 import java.util.Observable;
 
+import lab4.gui.GamePanel;
+
 /**
  * Represents the 2-d game grid
  */
@@ -62,8 +64,16 @@ public class GameGrid extends Observable{
 	 * @return true if the insertion worked, false otherwise
 	 */
 	public boolean move(int x, int y, int player){
-		
-		return true; //ej klar
+		if(grid[x][y]==EMPTY) {
+			grid[x][y] = player;
+			System.out.println("JAG ÄR FLYTTAD");
+			setChanged();
+			notifyObservers();
+			return true;
+		} else {
+			System.out.println("JAG ÄR INTE FLYTTAD");
+			return false; //ej klar
+		}
 	}
 	
 	/**

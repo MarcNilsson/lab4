@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import lab4.client.GomokuClient;
+import lab4.gui.GamePanel;
 
 
 /**
@@ -70,14 +71,22 @@ public class GomokuGameState extends Observable implements Observer{
 	 * @param y the y coordinate
 	 */
 	public void move(int x, int y){
+		x = x/GamePanel.UNIT_SIZE;
+		y = y/GamePanel.UNIT_SIZE;
 		if (currentState == NOT_STARTED) {
 			message = "The game is not started.";
-			System.out.println("hej");
+			System.out.println("NOT_STARTED x: "+x+" y: "+y);
+			System.out.println(grid.getLocation(x, y));
 		} else if (currentState == OTHER_TURN) {
 			message = "It is not your turn yet.";
-			System.out.println("hej");
+			System.out.println("OTHER_TURN x: "+x+" y: "+y);
+			System.out.println(grid.getLocation(x, y));
 		} else {
-			System.out.println("hej");
+			System.out.println("ANNARS x: "+x+" y: "+y);
+			System.out.println(grid.getLocation(x, y));
+			grid.move(x, y, grid.ME);
+
+			
 		}
 	}
 	

@@ -18,7 +18,7 @@ import lab4.data.GameGrid;
 
 public class GamePanel extends JPanel implements Observer{
 
-	public final int UNIT_SIZE = 20;
+	public static final int UNIT_SIZE = 20;
 	public GameGrid grid;
 	private Graphics2D g2;
 	
@@ -69,24 +69,22 @@ public class GamePanel extends JPanel implements Observer{
 			j = 0;
 			while(j < column) {
 				if(grid.getLocation(i, j) == GameGrid.ME) {
-					drawSquare(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE, Color.BLUE, g);
+					g.setColor(Color.BLUE);
+					g.fillRect(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE);
+					//drawSquare(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE, Color.BLUE, g);
 				} else if (grid.getLocation(i, j) == GameGrid.OTHER) {
-					drawSquare(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE, Color.RED, g);
+					g.setColor(Color.RED);
+					g.fillRect(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE);
+					//drawSquare(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE, Color.RED, g);
 				} else {
-					drawSquare(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE, Color.BLACK, g);
+					g.setColor(Color.BLACK);
+					g.drawRect(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE);
+					//drawSquare(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE, Color.BLACK, g);
 				}
 				j++;
 			} i++;
 		} 
-		
-		
-		
-	}
-	
-	//Skapar en rektangel med given storlek och färg.
-	private void drawSquare(int x, int y, int width, int height, Color color, Graphics g) {
-		g.setColor(color);
-		g.drawRect(x, y, width, height);
+			
 	}
 	
 }

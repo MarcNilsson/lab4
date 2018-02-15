@@ -1,6 +1,8 @@
 package lab4.gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
@@ -68,10 +70,27 @@ public class GomokuGUI implements Observer{
 		window.add(gameGridPanel, BorderLayout.NORTH);
 		messageLabel.setText(gamestate.getMessageString());
 		window.pack();
+		window.setResizable(false);
+		
+		connectButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				new ConnectionWindow(client);	
+			}
+			
+		});
+		
+		newGameButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				gamestate.newGame();	
+				
+			}
+			
+		});
 		
 		gameGridPanel.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("GUI click: " + e.getX() + " " + e.getY());
 				g.move(e.getX(), e.getY());
 			}
 
@@ -85,7 +104,6 @@ public class GomokuGUI implements Observer{
 		
 		// Update the buttons if the connection status has changed
 		if(arg0 == client){
-			messageLabel.setText(gamestate.getMessageString());
 			if(client.getConnectionStatus() == GomokuClient.UNCONNECTED){
 				connectButton.setEnabled(true);
 				newGameButton.setEnabled(false);
