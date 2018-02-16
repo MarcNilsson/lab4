@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements Observer{
 
 	public static final int UNIT_SIZE = 20;
 	public GameGrid grid;
-	private Graphics2D g2;
+
 	
 	/**
 	 * The constructor

@@ -48,11 +48,14 @@ public class GomokuGUI implements Observer{
 		grid = gamestate.getGameGrid();
 		gameGridPanel = new GamePanel(grid);
 		gameGridPanel.setVisible(true);
-		JButton connectButton = new JButton("Connect");
-		JButton newGameButton= new JButton("New Game");
-		JButton disconnectButton = new JButton("Disconnect");
-		JLabel messageLabel = new JLabel();
+		connectButton = new JButton("Connect");
+		newGameButton= new JButton("New Game");
+		disconnectButton = new JButton("Disconnect");
+		messageLabel = new JLabel();
 		JFrame window = new JFrame();
+		messageLabel.setText(gamestate.getMessageString());
+		newGameButton.setEnabled(false);
+		disconnectButton.setEnabled(false);
 		
 		//Box menu = Box.createHorizontalBox();
 		Box menu = new Box(BoxLayout.LINE_AXIS);
@@ -68,9 +71,9 @@ public class GomokuGUI implements Observer{
 		window.add(messageLabel, BorderLayout.CENTER);
 		window.add(menu, BorderLayout.SOUTH);
 		window.add(gameGridPanel, BorderLayout.NORTH);
-		messageLabel.setText(gamestate.getMessageString());
 		window.pack();
 		window.setResizable(false);
+
 		
 		connectButton.addActionListener(new ActionListener() {
 
@@ -84,6 +87,15 @@ public class GomokuGUI implements Observer{
 
 			public void actionPerformed(ActionEvent e) {
 				gamestate.newGame();	
+				
+			}
+			
+		});
+		
+		disconnectButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				gamestate.disconnect();	
 				
 			}
 			

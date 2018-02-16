@@ -1,9 +1,9 @@
 package lab4.data;
 
-import java.awt.Color;
+
 import java.util.Observable;
 
-import lab4.gui.GamePanel;
+
 
 /**
  * Represents the 2-d game grid
@@ -15,7 +15,7 @@ public class GameGrid extends Observable{
 	public static int ME = 1;
 	public static int OTHER = 2;
 	private int INROW = 5;
-	private int[][] grid;
+	private int[][] gameGrid;
 	/**
 	 * Constructor
 	 * 
@@ -23,12 +23,12 @@ public class GameGrid extends Observable{
 	 * @return 
 	 */
 	public GameGrid(int size){
-		grid = new int[size][size];
+		gameGrid = new int[size][size];
 		int i = 0;
 		int j = 0;
 		while(i < size) {
 			while(j < size) {
-				grid[i][j] = EMPTY;
+				gameGrid[i][j] = EMPTY;
 				j++;
 			}
 			i++;
@@ -43,7 +43,7 @@ public class GameGrid extends Observable{
 	 * @return the value of the specified location
 	 */
 	public int getLocation(int x, int y){
-		return grid[x][y];
+		return gameGrid[x][y];
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class GameGrid extends Observable{
 	 * @return the grid size
 	 */
 	public int getSize(){
-		return grid.length;
+		return gameGrid.length;
 	}
 	
 	/**
@@ -64,8 +64,8 @@ public class GameGrid extends Observable{
 	 * @return true if the insertion worked, false otherwise
 	 */
 	public boolean move(int x, int y, int player){
-		if(grid[x][y]==EMPTY) {
-			grid[x][y] = player;
+		if(gameGrid[x][y]==EMPTY) {
+			gameGrid[x][y] = player;
 			System.out.println("JAG ÄR FLYTTAD");
 			setChanged();
 			notifyObservers();
@@ -88,7 +88,7 @@ public class GameGrid extends Observable{
 		while(i < row) {
 			j = 0;
 			while(j < column) {
-				grid[i][j] = EMPTY;
+				gameGrid[i][j] = EMPTY;
 				j++;
 			} i++;
 		}
