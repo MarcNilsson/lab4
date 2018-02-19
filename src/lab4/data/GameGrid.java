@@ -101,8 +101,84 @@ public class GameGrid extends Observable{
 	 * @return true if player has 5 in row, false otherwise
 	 */
 	public boolean isWinner(int player){
-		return true; //ej klar
+		if(rowCheck() == player || diagCheck1() == player) {
+			return true; //ej klar
+		} else {
+			return false;
+		} 
 	}
 	
+//	private boolean rowCheck(int x, int y, int player) {
+//		int meRow = 0;
+//		int otherRow = 0;
+//		if(player == ME) {
+//			for(int i = 0; i < getSize()-INROW; i++) {
+//				if(meRow == INROW) {
+//						return true;
+//				} else if(gameGrid[i][y] == ME) {
+//				    meRow++;
+//				    otherRow = 0;
+//				} else if (gameGrid[i][y] == OTHER) {
+//				    otherRow++;
+//				    meRow = 0;
+//				}
+//			}	
+//	} return false;
+//	}
+	
+	private int rowCheck() {
+		int meRow = 0;
+		int otherRow = 0;
+			for(int i = 0; i < getSize()-INROW; i++) {
+				for(int j = 0; j < getSize()-INROW; j++) {	
+					if(gameGrid[i][j] == ME) {
+						meRow++;
+						otherRow = 0;
+					} else if (gameGrid[i][j] == OTHER) {
+						otherRow++;
+						meRow = 0;
+					}
+				}	
+				if(meRow == INROW) {
+					return ME;
+				} else if(otherRow == INROW) {
+					return OTHER;
+				} else {
+					continue;
+				}
+			} return 9;
+			
+	
+	}
+
+	
+	private int diagCheck1() {
+		int meDiag = 0;
+		int otherDiag = 0;
+			for(int i = 0; i <= getSize()-INROW; i++) {
+				for(int j = 0; j <= getSize()-INROW; j++) {
+					for(int k = 0; k < INROW; k++) {
+						int tempX = j+k;
+						int tempY = i+k;
+						 if(gameGrid[tempX][tempY] == ME) {
+							meDiag++;
+							otherDiag = 0;
+							continue;
+						} else if (gameGrid[tempX][tempY] == OTHER) {
+							otherDiag++;
+							meDiag = 0;
+							continue;
+						}
+					}
+				}		
+				if(meDiag == INROW) {
+					return ME;
+				} else if(otherDiag == INROW) {
+					return OTHER;
+				} else {
+					continue;
+				}
+		} return 9;
+	}
 	
 }

@@ -13,8 +13,8 @@ public class GomokuMain {
 		GomokuGUI GUI = new GomokuGUI(GS,GC);*/
 
 		
-		int portNumberOne = 3000;
-		int portNumberTwo = 3001;
+		int portNumberOne = 5000;
+		int portNumberTwo = 5001;
 		GomokuClient ClientEtt = new GomokuClient(portNumberOne);
 		GomokuClient ClientTvå = new GomokuClient(portNumberTwo);
 		GomokuGameState StateEtt = new GomokuGameState(ClientEtt);
