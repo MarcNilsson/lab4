@@ -66,13 +66,11 @@ public class GameGrid extends Observable{
 	public boolean move(int x, int y, int player){
 		if(gameGrid[x][y]==EMPTY) {
 			gameGrid[x][y] = player;
-			System.out.println("JAG ÄR FLYTTAD");
 			setChanged();
 			notifyObservers();
 			return true;
 		} else {
-			System.out.println("JAG ÄR INTE FLYTTAD");
-			return false; //ej klar
+			return false;
 		}
 	}
 	
@@ -92,6 +90,8 @@ public class GameGrid extends Observable{
 				j++;
 			} i++;
 		}
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**

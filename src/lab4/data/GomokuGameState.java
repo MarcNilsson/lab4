@@ -75,35 +75,34 @@ public class GomokuGameState extends Observable implements Observer{
 		y = y/GamePanel.UNIT_SIZE;
 		if (currentState == NOT_STARTED) {
 			message = "The game is not started.";
-			System.out.println("NOT_STARTED x: "+x+" y: "+y);
 			setChanged();
 			notifyObservers();
 			return;
 		} else if (currentState == OTHER_TURN) {
 			message = "It is not your turn yet.";
-			System.out.println("OTHER_TURN x: "+x+" y: "+y);
 			setChanged();
 			notifyObservers();
 			return;
 		} else if (currentState == FINISHED) {
 			message = "The game is finished.";
-			System.out.println("FINISHED x: "+x+" y: "+y);
 			setChanged();
 			notifyObservers();
 			return;
 			
 		} else if (currentState == MY_TURN){
-			System.out.println("ANNARS x: "+x+" y: "+y);
-			receivedMove(x, y);
-			gameGrid.move(x, y, gameGrid.ME);
-			message = "GameState.move hej";
-			client.sendMoveMessage(x, y);
-			currentState = OTHER_TURN;
-			receivedMove(x, y);
+			if(gameGrid.move(x, y, GameGrid.ME)) {
+				receivedMove(x, y);
+				message = "You have made a move, waiting for other player...";
+				client.sendMoveMessage(x, y);
+				currentState = OTHER_TURN;
+				setChanged();
+				notifyObservers();
+				return;
+		} else {
+			message = "Illegal move.";
 			setChanged();
 			notifyObservers();
-			return;
-
+		}
 			
 		}
 	}
@@ -114,7 +113,7 @@ public class GomokuGameState extends Observable implements Observer{
 	public void newGame(){
 		currentState = OTHER_TURN;
 		gameGrid.clearGrid();
-		message = "New game msg.";
+		message = "New game started, waiting for other player...";
 		client.sendNewGameMessage();
 		setChanged();
 		notifyObservers();
@@ -127,6 +126,7 @@ public class GomokuGameState extends Observable implements Observer{
 	public void receivedNewGame(){
 		currentState = MY_TURN;
 		gameGrid.clearGrid();
+		message = "New started, it's your turn!";
 		setChanged();
 		notifyObservers();
 	}
@@ -164,7 +164,9 @@ public class GomokuGameState extends Observable implements Observer{
 	public void receivedMove(int x, int y){
 		gameGrid.move(x,y,GameGrid.OTHER);
 		currentState = MY_TURN;
-		message = "min tur?";
+		message = "Your turn!";
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void update(Observable o, Object arg) {

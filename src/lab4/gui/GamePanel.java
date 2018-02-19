@@ -48,7 +48,6 @@ public class GamePanel extends JPanel implements Observer{
 	 */
 	public int[] getGridPosition(int x, int y){
 		int[] temp = {x, y};
-		System.out.println("Mouse click on "+temp);
 		return temp;
 	}
 	
@@ -71,15 +70,19 @@ public class GamePanel extends JPanel implements Observer{
 				if(grid.getLocation(i, j) == GameGrid.ME) {
 					g.setColor(Color.BLUE);
 					g.fillRect(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE);
-					//drawSquare(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE, Color.BLUE, g);
+					g.setColor(Color.BLACK);
+					g.drawRect(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE);
+		
 				} else if (grid.getLocation(i, j) == GameGrid.OTHER) {
 					g.setColor(Color.RED);
 					g.fillRect(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE);
-					//drawSquare(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE, Color.RED, g);
+					g.setColor(Color.BLACK);
+					g.drawRect(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE);
+					
 				} else {
 					g.setColor(Color.BLACK);
 					g.drawRect(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE);
-					//drawSquare(i*UNIT_SIZE, j*UNIT_SIZE, UNIT_SIZE, UNIT_SIZE, Color.BLACK, g);
+
 				}
 				j++;
 			} i++;
