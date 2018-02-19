@@ -92,10 +92,10 @@ public class GomokuGameState extends Observable implements Observer{
 		} else if (currentState == MY_TURN){
 			if(gameGrid.move(x, y, GameGrid.ME)) {
 				receivedMove(x, y);
+				System.out.println(gameGrid.isWinner(GameGrid.ME));
 				message = "You have made a move, waiting for other player...";
 				client.sendMoveMessage(x, y);
 				currentState = OTHER_TURN;
-				System.out.println(gameGrid.isWinner(GameGrid.ME));
 				setChanged();
 				notifyObservers();
 				return;

@@ -101,7 +101,7 @@ public class GameGrid extends Observable{
 	 * @return true if player has 5 in row, false otherwise
 	 */
 	public boolean isWinner(int player){
-		if(rowCheck() == player || diagCheck1() == player) {
+		if(rowCheck() == ME || diagCheck1() == ME) {
 			return true; //ej klar
 		} else {
 			return false;
@@ -134,18 +134,18 @@ public class GameGrid extends Observable{
 					if(gameGrid[i][j] == ME) {
 						meRow++;
 						otherRow = 0;
+						continue;
 					} else if (gameGrid[i][j] == OTHER) {
 						otherRow++;
 						meRow = 0;
+						continue;
 					}
 				}	
 				if(meRow == INROW) {
 					return ME;
 				} else if(otherRow == INROW) {
 					return OTHER;
-				} else {
-					continue;
-				}
+				} 
 			} return 9;
 			
 	
