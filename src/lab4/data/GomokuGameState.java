@@ -99,7 +99,6 @@ public class GomokuGameState extends Observable implements Observer{
 					notifyObservers();
 					return;
 				}
-				System.out.println("isWinner: " + gameGrid.isWinner(GameGrid.ME, x, y) + " x:" + x + " y:" + y);
 				message = "You have made a move, waiting for other player...";
 				client.sendMoveMessage(x, y);
 				currentState = OTHER_TURN;
@@ -176,16 +175,11 @@ public class GomokuGameState extends Observable implements Observer{
 			setChanged();
 			notifyObservers();
 			client.sendMoveMessage(x, y);
-
-			//return;
 		} else if (gameGrid.isWinner(GameGrid.OTHER, x, y)) {
 			currentState = FINISHED;
 			message = "You lose!";
 			setChanged();
 			notifyObservers();
-			//client.sendMoveMessage(x, y);
-
-			//return;
 		} else {
 			gameGrid.move(x,y,GameGrid.OTHER);
 			currentState = MY_TURN;
