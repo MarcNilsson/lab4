@@ -163,6 +163,21 @@ public class GomokuGameState extends Observable implements Observer{
 	 * @param y The y coordinate of the move
 	 */
 	public void receivedMove(int x, int y){
+		if(gameGrid.isWinner(GameGrid.ME, x, y)) {
+			currentState = FINISHED;
+			message = "You win!";
+			setChanged();
+			notifyObservers();
+			client.sendMoveMessage(x, y);
+			return;
+		} else if (gameGrid.isWinner(GameGrid.OTHER, x, y)) {
+			currentState = FINISHED;
+			message = "You lose!";
+			setChanged();
+			notifyObservers();
+			client.sendMoveMessage(x, y);
+			return;
+		}
 		gameGrid.move(x,y,GameGrid.OTHER);
 		currentState = MY_TURN;
 		message = "Your turn!";
